@@ -7,12 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Added
+## [0.1.1] - 2026-03-21
 
-- `install.sh` — one-liner installer that detects OS/arch and downloads the correct binary from the latest GitHub Release
-- `apa update` — checks GitHub for a newer version and replaces the binary in-place
-- `apa update --check` — version check without installing
-- GitHub Actions release workflow builds pre-compiled binaries for macOS (arm64/x64), Linux (x64/arm64), and Windows (x64) on every `v*` tag push
+### Fixed
+
+- Extracted duplicated `readWavSamples` from `sync.js` and `silence.js` into a shared `src/wav.js` module
+- Removed duplicate `parseFrameRateParts` in `fcpxml.js` — now imports `parseFrameRate` from `rational.js`
+- Removed dead `buildAudioFilters` export from `effects.js` (was never imported)
+- Removed redundant silence re-assignment loop in `pipeline.js` (`buildTimeline` already attaches silence data)
+- Removed unused `scanResult` parameter from `printReport` in `report.js`
+- Replaced `softprops/action-gh-release` Action with `gh release create` CLI to eliminate Node.js version warnings in CI
 
 ## [0.1.0] - 2026-03-21
 
@@ -33,5 +37,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `apa.config.json` for all tunable parameters
 - CLI via `apa --input <path> --config <path>`
 
-[Unreleased]: https://github.com/rsumilang/asmr-project-assembler/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/rsumilang/asmr-project-assembler/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/rsumilang/asmr-project-assembler/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/rsumilang/asmr-project-assembler/releases/tag/v0.1.0

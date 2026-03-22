@@ -1,6 +1,6 @@
 {
   "name": "apa",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "ASMR Project Assembler — generates Final Cut Pro FCPXML multicam projects from a folder of video clips",
   "type": "module",
   "license": "MIT",
