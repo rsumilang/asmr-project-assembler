@@ -11,8 +11,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 | Install deps | `npm install` |
 | Run CLI | `node bin/apa.js --input <path> [--config ./apa.config.json]` |
 | Run (global install) | `npm install -g . && apa --input <path>` |
+| Check for update | `apa update --check` |
+| Self-update binary | `apa update` |
 | Lint | `npm run lint` |
 | Lint + autofix | `npm run lint:fix` |
+| Cut a release | `git tag v{x.y.z} && git push origin v{x.y.z}` |
 
 FFmpeg must be installed separately and available on `PATH`.
 
@@ -46,6 +49,7 @@ Temp WAV files are deleted in a `finally` block at the end of the pipeline.
 | `src/effects.js` | Returns xmlbuilder2 object descriptors for Channel EQ and Gain `filter-audio` elements |
 | `src/timeline.js` | Computes `timelineStart` for secondary clips using: `primarySource0 + offsetSeconds + silence.inPoint` |
 | `src/sync.js` | FFT cross-correlation using `fft-js`; sign convention: positive `offsetSamples` = secondary starts after primary |
+| `src/wav.js` | Shared `readWavSamples` utility — reads 16kHz mono 16-bit WAV into a normalized Float32Array |
 
 ### FCPXML conventions
 
@@ -93,12 +97,6 @@ timelineStart    = secondarySource0 + silence.inPoint
 `offsetSeconds` from `crossCorrelate(primary, secondary)`:
 - Positive = secondary source[0] is later on the timeline (secondary started after primary)
 - Negative = secondary source[0] is earlier (secondary started before primary)
-
----
-
-## Linting
-
-Uses `semistandard` (Standard JS + semicolons). Config in `package.json` under `"semistandard"`. Glob targets: `bin/**/*.js src/**/*.js`.
 
 ---
 
