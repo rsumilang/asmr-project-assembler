@@ -1,0 +1,19 @@
+{
+  "primaryAngle": "primary",
+  "silenceThreshold": -50,
+  "silenceHandleFrames": 12,
+  "syncFingerprintDuration": 60,
+  "syncConfidenceThreshold": 0.6,
+  "unmatchedClipBehavior": "warn",
+  "targetPeakDb": -3,
+  "asmrEq": {
+    "highpassHz": 80,
+    "midCutHz": 350,
+    "midCutDb": -2,
+    "airBoostHz": 10000,
+    "airBoostDb": 3
+  },
+  "fadeFrames": 8,
+  "frameRate": "30000/1001",
+  "outputPath": "./output.fcpxml"
+}

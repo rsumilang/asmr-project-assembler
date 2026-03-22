@@ -1,0 +1,32 @@
+{
+  "name": "apa",
+  "version": "0.1.0",
+  "description": "ASMR Project Assembler — generates Final Cut Pro FCPXML multicam projects from a folder of video clips",
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "bin": {
+    "apa": "./bin/apa.js"
+  },
+  "scripts": {
+    "start": "node bin/apa.js",
+    "lint": "semistandard 'bin/**/*.js' 'src/**/*.js'",
+    "lint:fix": "semistandard --fix 'bin/**/*.js' 'src/**/*.js'"
+  },
+  "semistandard": {
+    "env": [
+      "node"
+    ]
+  },
+  "dependencies": {
+    "commander": "^12.0.0",
+    "fft-js": "^0.0.12",
+    "fluent-ffmpeg": "^2.1.3",
+    "xmlbuilder2": "^3.1.1"
+  },
+  "devDependencies": {
+    "semistandard": "^17.0.0"
+  }
+}

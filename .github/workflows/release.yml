@@ -1,0 +1,67 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build binaries
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Build binaries
+        run: |
+          mkdir -p dist
+
+          bun build bin/apa.js \
+            --compile \
+            --target=bun-darwin-arm64 \
+            --outfile dist/apa-macos-arm64
+
+          bun build bin/apa.js \
+            --compile \
+            --target=bun-darwin-x64 \
+            --outfile dist/apa-macos-x64
+
+          bun build bin/apa.js \
+            --compile \
+            --target=bun-linux-x64 \
+            --outfile dist/apa-linux-x64
+
+          bun build bin/apa.js \
+            --compile \
+            --target=bun-linux-arm64 \
+            --outfile dist/apa-linux-arm64
+
+          bun build bin/apa.js \
+            --compile \
+            --target=bun-windows-x64 \
+            --outfile dist/apa-windows-x64.exe
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: ${{ github.ref_name }}
+          draft: false
+          prerelease: ${{ contains(github.ref_name, '-') }}
+          generate_release_notes: true
+          files: |
+            dist/apa-macos-arm64
+            dist/apa-macos-x64
+            dist/apa-linux-x64
+            dist/apa-linux-arm64
+            dist/apa-windows-x64.exe
